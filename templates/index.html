@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Reputation Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">Tugas Kelompok 9 - Pemrograman Back-End</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">🔍 Cek Reputasi IP Address</h1>
+        <p class="description">
+            Masukkan alamat IP untuk memeriksa apakah IP tersebut pernah dilaporkan terkait aktivitas berbahaya (Spam, Hacking, DDoS).
+        </p>
+        
+        {% if error %}
+            <div class="alert error">{{ error }}</div>
+        {% endif %}
+
+        <div class="card form-card">
+            <form method="POST">
+                <input type="text" name="ip_address" placeholder="Contoh IP Berbahaya: 118.27.74.133 atau IP Google: 8.8.8.8" required>
+                <button type="submit" class="btn">Periksa IP</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

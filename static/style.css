@@ -1,0 +1,43 @@
+/* static/style.css */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background-color: #f4f7f6; color: #333; line-height: 1.6; }
+
+/* Navigasi */
+.navbar { background: #00b4d8; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.nav-brand { font-size: 1.2rem; font-weight: bold; }
+.nav-links { list-style: none; }
+.nav-links a { color: white; text-decoration: none; font-weight: 500; }
+.nav-links a:hover { text-decoration: underline; }
+
+/* Container & Typography */
+.container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+h1.page-title { text-align: center; color: #2b2d42; margin-bottom: 10px; }
+.description { text-align: center; color: #6c757d; margin-bottom: 30px; }
+.highlight { color: #0077b6; }
+
+/* Cards */
+.card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
+.form-card { max-width: 500px; margin: 0 auto; text-align: center; }
+
+/* Formulir */
+input[type="text"] { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ced4da; border-radius: 4px; font-size: 1rem; }
+.btn { background: #023e8a; color: white; border: none; padding: 12px 25px; font-size: 1rem; border-radius: 4px; cursor: pointer; transition: 0.3s; width: 100%; font-weight: bold; }
+.btn:hover { background: #0077b6; }
+
+/* Badges / Indikator */
+.badge { padding: 5px 10px; border-radius: 20px; color: white; font-weight: bold; font-size: 0.9rem; }
+.badge.danger { background-color: #d90429; }
+.badge.warning { background-color: #ffb703; color: #000; }
+.badge.success { background-color: #2a9d8f; }
+
+/* Tabel */
+.table-responsive { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.data-table th, .data-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #e9ecef; }
+.data-table th { background-color: #00b4d8; color: white; }
+.data-table tr:hover { background-color: #f1f3f5; }
+
+/* Alerts */
+.alert { padding: 15px; border-radius: 4px; margin-bottom: 20px; text-align: center; font-weight: bold; }
+.alert.error { background-color: #ffe3e6; color: #d90429; border: 1px solid #ffccd5; }
+.alert.success { background-color: #e3f2fd; color: #023e8a; border: 1px solid #bbdefb; }

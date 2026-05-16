@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Analisis - {{ data.ipAddress }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">Tugas Kelompok 1 - ITTS</div>
+        <ul class="nav-links">
+            <li><a href="/">Kembali ke Pencarian</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Hasil Analisis IP: <span class="highlight">{{ data.ipAddress }}</span></h1>
+        
+        <div class="card summary-card">
+            <h3>Informasi Jaringan</h3>
+            <p><strong>ISP:</strong> {{ data.isp }}</p>
+            <p><strong>Domain:</strong> {{ data.domain }}</p>
+            <p><strong>Negara:</strong> {{ data.countryCode }}</p>
+            <p><strong>Skor Ancaman:</strong> 
+                <span class="badge {% if data.abuseConfidenceScore > 50 %}danger{% elif data.abuseConfidenceScore > 0 %}warning{% else %}success{% endif %}">
+                    {{ data.abuseConfidenceScore }}%
+                </span>
+            </p>
+            <p><strong>Total Dilaporkan:</strong> {{ data.totalReports }} kali</p>
+        </div>
+
+        <h2 style="margin-top: 30px;">Daftar Laporan Terakhir</h2>
+        <p class="description">Berikut adalah riwayat laporan dari pengguna di seluruh dunia terkait IP ini.</p>
+
+        {% if data.reports and data.reports|length > 0 %}
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Tanggal Dilaporkan</th>
+                            <th>Kategori Ancaman</th>
+                            <th>Komentar Pelapor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for report in data.reports %}
+                        <tr>
+                            <td>{{ report.reportedAt[:10] }}</td>
+                            <td>{{ report.categories | join(', ') }}</td>
+                            <td>{{ report.comment }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert success">
+                ✅ Keren! Tidak ada laporan kejahatan siber untuk IP ini dalam waktu dekat. IP ini aman.
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
