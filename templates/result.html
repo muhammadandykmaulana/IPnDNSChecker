@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasil Analisis - {{ data.ipAddress }}</title>
+    <title>Hasil Analisis - {{ target }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -15,48 +15,86 @@
     </nav>
 
     <div class="container">
-        <h1>Hasil Analisis IP: <span class="highlight">{{ data.ipAddress }}</span></h1>
+        <h1>Hasil Analisis: <span class="highlight">{{ target }}</span></h1>
         
-        <div class="card summary-card">
-            <h3>Informasi Jaringan</h3>
-            <p><strong>ISP:</strong> {{ data.isp }}</p>
-            <p><strong>Domain:</strong> {{ data.domain }}</p>
-            <p><strong>Negara:</strong> {{ data.countryCode }}</p>
-            <p><strong>Skor Ancaman:</strong> 
-                <span class="badge {% if data.abuseConfidenceScore > 50 %}danger{% elif data.abuseConfidenceScore > 0 %}warning{% else %}success{% endif %}">
-                    {{ data.abuseConfidenceScore }}%
-                </span>
-            </p>
-            <p><strong>Total Dilaporkan:</strong> {{ data.totalReports }} kali</p>
-        </div>
+        {% if search_type == 'ip' %}
+            <div class="card summary-card">
+                <h3>Informasi Jaringan (AbuseIPDB)</h3>
+                <p><strong>ISP:</strong> {{ data.isp }}</p>
+                <p><strong>Negara:</strong> {{ data.countryCode }}</p>
+                <p><strong>Skor Ancaman:</strong> 
+                    <span class="badge {% if data.abuseConfidenceScore > 50 %}danger{% elif data.abuseConfidenceScore > 0 %}warning{% else %}success{% endif %}">
+                        {{ data.abuseConfidenceScore }}%
+                    </span>
+                </p>
+                <p><strong>Total Dilaporkan:</strong> {{ data.totalReports }} kali</p>
+            </div>
 
-        <h2 style="margin-top: 30px;">Daftar Laporan Terakhir</h2>
-        <p class="description">Berikut adalah riwayat laporan dari pengguna di seluruh dunia terkait IP ini.</p>
+            <h2 style="margin-top: 30px;">Daftar Laporan Terakhir</h2>
+            {% if data.reports and data.reports|length > 0 %}
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Kategori</th>
+                                <th>Komentar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for report in data.reports %}
+                            <tr>
+                                <td>{{ report.reportedAt[:10] }}</td>
+                                <td>{{ report.categories | join(', ') }}</td>
+                                <td>{{ report.comment }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert success">✅ IP ini aman dan belum pernah dilaporkan.</div>
+            {% endif %}
 
-        {% if data.reports and data.reports|length > 0 %}
+        {% elif search_type == 'domain' %}
+            <div class="card summary-card">
+                <h3>Statistik Reputasi (VirusTotal)</h3>
+                <p><strong>Kategori Terdeteksi:</strong> {{ data.categories | default('Tidak ada', true) }}</p>
+                <p><strong>Status Analisis Mesin Antivirus:</strong></p>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li style="color: red;"><strong>Malicious (Berbahaya):</strong> {{ data.last_analysis_stats.malicious }}</li>
+                    <li style="color: orange;"><strong>Suspicious (Mencurigakan):</strong> {{ data.last_analysis_stats.suspicious }}</li>
+                    <li style="color: green;"><strong>Harmless (Aman):</strong> {{ data.last_analysis_stats.harmless }}</li>
+                    <li><strong>Undetected (Tidak Terdeteksi):</strong> {{ data.last_analysis_stats.undetected }}</li>
+                </ul>
+            </div>
+
+            <h2 style="margin-top: 30px;">Rincian Deteksi Mesin Antivirus</h2>
+            <p class="description">Hasil *scan* dari puluhan *security vendor* di seluruh dunia.</p>
+            
             <div class="table-responsive">
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Tanggal Dilaporkan</th>
-                            <th>Kategori Ancaman</th>
-                            <th>Komentar Pelapor</th>
+                            <th>Nama Mesin Antivirus</th>
+                            <th>Kategori Hasil</th>
+                            <th>Status Analisis</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for report in data.reports %}
+                        {% for engine, result in data.last_analysis_results.items() %}
                         <tr>
-                            <td>{{ report.reportedAt[:10] }}</td>
-                            <td>{{ report.categories | join(', ') }}</td>
-                            <td>{{ report.comment }}</td>
+                            <td><strong>{{ engine }}</strong></td>
+                            <td>
+                                <span class="badge {% if result.category == 'malicious' %}danger{% elif result.category == 'suspicious' %}warning{% elif result.category == 'harmless' %}success{% else %}neutral{% endif %}">
+                                    {{ result.category | capitalize }}
+                                </span>
+                            </td>
+                            <td>{{ result.result or 'Clean/Unrated' }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
-        {% else %}
-            <div class="alert success">
-                ✅ Keren! Tidak ada laporan kejahatan siber untuk IP ini dalam waktu dekat. IP ini aman.
             </div>
         {% endif %}
     </div>

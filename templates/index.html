@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IP Reputation Checker</title>
+    <title>Cyber Threat Analyzer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-brand">Tugas Kelompok 9 - Pemrograman Back-End</div>
+        <div class="nav-brand">Tugas Kelompok 1 - ITTS</div>
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
+            <li><a href="/">Beranda Utama</a></li>
         </ul>
     </nav>
 
     <div class="container">
-        <h1 class="page-title">🔍 Cek Reputasi IP Address</h1>
+        <h1 class="page-title">🛡️ Cyber Threat Analyzer</h1>
         <p class="description">
-            Masukkan alamat IP untuk memeriksa apakah IP tersebut pernah dilaporkan terkait aktivitas berbahaya (Spam, Hacking, DDoS).
+            Periksa reputasi Alamat IP atau Domain untuk mendeteksi ancaman seperti Malware, Phishing, dan Spam.
         </p>
         
         {% if error %}
@@ -26,8 +26,17 @@
 
         <div class="card form-card">
             <form method="POST">
-                <input type="text" name="ip_address" placeholder="Contoh IP Berbahaya: 118.27.74.133 atau IP Google: 8.8.8.8" required>
-                <button type="submit" class="btn">Periksa IP</button>
+                <div class="radio-group" style="margin-bottom: 20px; text-align: left;">
+                    <label style="margin-right: 15px; cursor: pointer;">
+                        <input type="radio" name="search_type" value="ip" checked> IP Address (AbuseIPDB)
+                    </label>
+                    <label style="cursor: pointer;">
+                        <input type="radio" name="search_type" value="domain"> Domain URL (VirusTotal)
+                    </label>
+                </div>
+
+                <input type="text" name="target_input" placeholder="Masukkan IP (misal: 8.8.8.8) atau Domain (misal: google.com)" required>
+                <button type="submit" class="btn">Mulai Pindai</button>
             </form>
         </div>
     </div>

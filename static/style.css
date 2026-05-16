@@ -41,3 +41,7 @@ input[type="text"] { width: 100%; padding: 12px; margin-bottom: 15px; border: 1p
 .alert { padding: 15px; border-radius: 4px; margin-bottom: 20px; text-align: center; font-weight: bold; }
 .alert.error { background-color: #ffe3e6; color: #d90429; border: 1px solid #ffccd5; }
 .alert.success { background-color: #e3f2fd; color: #023e8a; border: 1px solid #bbdefb; }
+
+/* Tambahkan di bawah .badge.success di file css kamu sebelumnya */
+.badge.neutral { background-color: #6c757d; color: white; }
+.radio-group { font-size: 1.1rem; font-weight: 500; color: #2b2d42; }
