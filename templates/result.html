@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasil Analisis - {{ target }}</title>
+    <title>Hasil - {{ target }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-brand">Tugas Kelompok 1 - ITTS</div>
+        <div class="nav-brand">Tugas Backend Kel/UTS</div>
         <ul class="nav-links">
             <li><a href="/">Kembali ke Pencarian</a></li>
         </ul>
@@ -16,13 +16,13 @@
 
     <div class="container">
         <h1>Hasil Analisis: <span class="highlight">{{ target }}</span></h1>
-        
+
         {% if search_type == 'ip' %}
             <div class="card summary-card">
                 <h3>Informasi Jaringan (AbuseIPDB)</h3>
                 <p><strong>ISP:</strong> {{ data.isp }}</p>
                 <p><strong>Negara:</strong> {{ data.countryCode }}</p>
-                <p><strong>Skor Ancaman:</strong> 
+                <p><strong>Skor Ancaman:</strong>
                     <span class="badge {% if data.abuseConfidenceScore > 50 %}danger{% elif data.abuseConfidenceScore > 0 %}warning{% else %}success{% endif %}">
                         {{ data.abuseConfidenceScore }}%
                     </span>
@@ -70,8 +70,8 @@
             </div>
 
             <h2 style="margin-top: 30px;">Rincian Deteksi Mesin Antivirus</h2>
-            <p class="description">Hasil *scan* dari puluhan *security vendor* di seluruh dunia.</p>
-            
+            <p class="description">Hasil pemindaian dari puluhan vendor keamanan di seluruh dunia.</p>
+
             <div class="table-responsive">
                 <table class="data-table">
                     <thead>

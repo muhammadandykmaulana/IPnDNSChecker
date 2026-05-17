@@ -3,42 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Threat Analyzer</title>
+    <title>🛡️ IP / DNS Checker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-brand">Tugas Kelompok 9 - Pemrograman Back-End</div>
+        <div class="nav-brand">Tugas Backend Kel/UTS</div>
         <ul class="nav-links">
             <li><a href="/">Beranda Utama</a></li>
         </ul>
     </nav>
 
     <div class="container">
-        <h1 class="page-title">🛡️ Cyber Threat Analyzer</h1>
+        <h1 class="page-title">🛡️ IP / DNS Checker</h1>
         <p class="description">
             Periksa reputasi Alamat IP atau Domain untuk mendeteksi ancaman seperti Malware, Phishing, dan Spam.
         </p>
-        
+
         {% if error %}
             <div class="alert error">{{ error }}</div>
         {% endif %}
 
         <div class="card form-card">
             <form method="POST">
-                <div class="radio-group" style="margin-bottom: 20px; text-align: left;">
-                    <label style="margin-right: 15px; cursor: pointer;">
-                        <input type="radio" name="search_type" value="ip" checked> IP Address (AbuseIPDB)
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="search_type" value="ip" checked>
+                        <span class="radio-text">IP Address (AbuseIPDB)</span>
                     </label>
-                    <label style="cursor: pointer;">
-                        <input type="radio" name="search_type" value="domain"> Domain URL (VirusTotal)
+                    <label class="radio-label">
+                        <input type="radio" name="search_type" value="domain">
+                        <span class="radio-text">Domain URL (VirusTotal)</span>
                     </label>
                 </div>
 
-                <input type="text" name="target_input" placeholder="Masukkan IP (misal: 8.8.8.8) atau Domain (misal: google.com)" required>
-                <button type="submit" class="btn">Mulai Cek</button>
+                <input type="text" name="target_input" placeholder="Masukkan Alamat IP (misal: 8.8.8.8)" required>
+                <button type="submit" class="btn">Mulai Cek Sekarang!</button>
             </form>
         </div>
     </div>
+
+    <!-- Script untuk placeholder dinamis -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ipRadio = document.querySelector('input[value="ip"]');
+            const domainRadio = document.querySelector('input[value="domain"]');
+            const targetInput = document.querySelector('input[name="target_input"]');
+
+            function updatePlaceholder() {
+                if (ipRadio.checked) {
+                    targetInput.placeholder = "Masukkan Alamat IP (misal: 8.8.8.8)";
+                } else {
+                    targetInput.placeholder = "Masukkan Nama Domain (misal: google.com)";
+                }
+            }
+
+            ipRadio.addEventListener('change', updatePlaceholder);
+            domainRadio.addEventListener('change', updatePlaceholder);
+            updatePlaceholder(); // atur saat halaman dimuat
+        });
+    </script>
 </body>
 </html>
