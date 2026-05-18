@@ -60,11 +60,12 @@
             background-color: #1e1e1e;
             padding: 15px;
             border-radius: 8px;
-            font-size: 0.55em;
+            font-size: 0.6em; /* Sedikit dibesarkan dari 0.55em */
             text-align: left;
             overflow-x: auto;
-            margin-top: 15px;
+            margin-top: 10px;
             border-left: 4px solid #4da6ff;
+            line-height: 1.4; /* Tambahkan line-height agar kode tidak dempet */
         }
     </style>
 </head>
@@ -106,7 +107,7 @@
                 </ol>
             </section>
 
-            <!-- Slide 4: Tech Stack -->
+			<!-- Slide 4: Teknologi yang Digunakan -->
             <section>
                 <h3>Teknologi yang Digunakan</h3>
                 <ul>
@@ -130,19 +131,27 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong class="highlight-blue">AbuseIPDB API v2</strong></td>
+                            <td>
+                                <strong>
+                                    <a href="https://docs.abuseipdb.com/" target="_blank" class="highlight-blue" style="text-decoration: underline;">AbuseIPDB API v2</a>
+                                </strong>
+                            </td>
                             <td>Mengambil skor kepercayaan, detail ISP, dan riwayat laporan aktivitas mencurigakan dari sebuah alamat IP.</td>
                             <td>JSON</td>
                         </tr>
                         <tr>
-                            <td><strong class="highlight-blue">VirusTotal API v3</strong></td>
+                            <td>
+                                <strong>
+                                    <a href="https://docs.virustotal.com/" target="_blank" class="highlight-blue" style="text-decoration: underline;">VirusTotal API v3</a>
+                                </strong>
+                            </td>
                             <td>Mengambil hasil pemindaian dari puluhan mesin antivirus global (Kaspersky, BitDefender, dll) terhadap sebuah URL/Domain.</td>
                             <td>JSON</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
-
+			
             <!-- Slide 6: Struktur Folder -->
             <section>
                 <h3>Struktur Direktori</h3>
@@ -161,48 +170,37 @@
             <!-- Slide 7: Cara Install -->
             <section>
                 <h3>Panduan Instalasi Lokal</h3>
-                <div style="font-size: 0.55em; text-align: left; margin-top: 20px;">
-                    <p><strong>1. Clone Repositori & Instalasi Library</strong><br>Buka terminal dan jalankan perintah berikut:</p>
-                    <div class="code-block" style="margin-top: 5px; margin-bottom: 15px;">
-<pre># Clone repository proyek
+                <div style="text-align: left; font-size: 0.65em; line-height: 1.5; width: 90%; margin: 0 auto;">
+                    
+                    <div style="margin-bottom: 20px;">
+                        <strong>1. Clone Repositori & Instalasi Library</strong>
+                        <p style="margin: 5px 0 5px 0;">Buka terminal dan jalankan perintah berikut:</p>
+                        <div class="code-block" style="font-size: 0.75em; padding: 12px;">
+<pre style="margin: 0;"><code># Clone repository proyek
 git clone https://github.com/muhammadandykmaulana/IPnDNSChecker.git
+
 # Masuk ke dalam direktori proyek
 cd IPnDNSChecker
+
 # Install library yang dibutuhkan
-pip install Flask requests</pre>
+pip install Flask requests</code></pre>
+                        </div>
                     </div>
-                    
-                    <p><strong>2. Konfigurasi API Key</strong><br>Buka file <code>app.py</code>, cari variabel di bawah ini, dan masukkan API Key Anda:</p>
-                    <div class="code-block" style="margin-top: 5px;">
-<pre>ABUSEIPDB_API_KEY = 'MASUKKAN_API_KEY_ABUSEIPDB_DISINI'
-VIRUSTOTAL_API_KEY = 'MASUKKAN_API_KEY_VIRUSTOTAL_DISINI'</pre>
+
+                    <div style="margin-bottom: 20px;">
+                        <strong>2. Konfigurasi API Key</strong>
+                        <p style="margin: 5px 0 5px 0;">Buka file <code>app.py</code>, cari variabel di bawah ini, dan masukkan API Key Anda:</p>
+                        <div class="code-block" style="font-size: 0.75em; padding: 12px;">
+<pre style="margin: 0;"><code>ABUSEIPDB_API_KEY = 'MASUKKAN_API_KEY_ABUSEIPDB_DISINI'
+VIRUSTOTAL_API_KEY = 'MASUKKAN_API_KEY_VIRUSTOTAL_DISINI'</code></pre>
+                        </div>
                     </div>
-                    
-                    <p style="margin-top: 15px;"><strong>3. Jalankan:</strong> Ketik <code>python app.py</code> lalu buka <code>http://127.0.0.1:5000</code></p>
-                </div>
-            </section>
 
-            <!-- Slide 8: Arsitektur & Alur Kerja -->
-            <section>
-                <h3>Alur Kerja Sistem</h3>
-                <ol style="font-size: 0.7em;">
-                    <li><strong>Input Pengguna:</strong> Memilih tipe (IP/Domain) dan memasukkan target di halaman utama.</li>
-                    <li><strong>Pemrosesan Back-End:</strong> Flask menerima POST request, menyusun Header (API Key), dan menembak endpoint API yang sesuai.</li>
-                    <li><strong>Pengolahan Data:</strong> Parsing data mentah JSON, menyaring array dan dictionary yang dibutuhkan.</li>
-                    <li><strong>Rendering:</strong> Data dikirim ke <code>result.html</code>. Looping Jinja2 menyusun laporan menjadi tabel data.</li>
-                </ol>
-            </section>
+                    <div>
+                        <strong>3. Jalankan Aplikasi</strong>
+                        <p style="margin: 5px 0 0 0;">Ketik <code>python app.py</code> di terminal, lalu buka <span class="highlight-blue">http://127.0.0.1:5000</span> di browser Anda.</p>
+                    </div>
 
-            <!-- Slide 9: Link Repo & Demo -->
-            <section>
-                <h3>Akses Proyek</h3>
-                <div style="margin-top: 40px;">
-                    <p style="font-size: 1.2em;"><strong>GitHub Repository:</strong></p>
-                    <p><a href="https://github.com/muhammadandykmaulana/IPnDNSChecker" target="_blank" class="highlight-blue">github.com/muhammadandykmaulana/IPnDNSChecker</a></p>
-                </div>
-                <div style="margin-top: 40px;">
-                    <p style="font-size: 1.2em;"><strong>Live Demo (GitHub Pages):</strong></p>
-                    <p><a href="https://ipndnsshow.servant.biz.id/" target="_blank" class="highlight-blue">ipndnsshow.servant.biz.id</a></p>
                 </div>
             </section>
 
