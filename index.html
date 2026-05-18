@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
     
-    <!-- Theme (You can change 'night' to 'black', 'white', 'league', 'beige', etc.) -->
+    <!-- Theme -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css" id="theme">
 
     <style>
-        .reveal h1, .reveal h2, .reveal h3 {
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
             text-transform: none; /* Keep original casing */
         }
         .reveal p {
@@ -36,6 +36,10 @@
         .table-custom th {
             background-color: #333;
             color: white;
+            padding: 10px;
+        }
+        .table-custom td {
+            padding: 8px;
         }
         .highlight-blue {
             color: #4da6ff;
@@ -43,14 +47,24 @@
         .member-list {
             list-style-type: none;
             padding: 0;
-            margin-top: 30px !important;
-            font-size: 0.9em !important;
+            margin-top: 20px !important;
+            font-size: 0.8em !important;
         }
         .member-list li {
-            margin-bottom: 15px;
-            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.05);
             padding: 10px;
             border-radius: 8px;
+        }
+        .code-block {
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.55em;
+            text-align: left;
+            overflow-x: auto;
+            margin-top: 15px;
+            border-left: 4px solid #4da6ff;
         }
     </style>
 </head>
@@ -129,7 +143,34 @@
                 </table>
             </section>
 
-            <!-- Slide 6: Arsitektur & Alur Kerja -->
+            <!-- Slide 6: Struktur Folder -->
+            <section>
+                <h3>Struktur Direktori</h3>
+                <p>Mengadopsi standar pemisahan logika dan tampilan (MVC-style):</p>
+                <div class="code-block">
+<pre>Cyber-Threat-Analyzer/
+├── app.py                 # File utama routing Flask & logika API
+├── requirements.txt       # Daftar library (dependencies)
+├── .env                   # File tersembunyi untuk API Key
+└── templates/             # Folder wajib untuk tampilan HTML
+    ├── index.html         # Form input halaman utama
+    └── result.html        # Halaman tabel hasil analisis</pre>
+                </div>
+            </section>
+
+            <!-- Slide 7: Cara Install -->
+            <section>
+                <h3>Panduan Instalasi Lokal</h3>
+                <ol style="font-size: 0.65em; text-align: left; margin-left: 20px;">
+                    <li style="margin-bottom: 12px;"><strong>Clone Repo:</strong> <br><code>git clone https://github.com/muhammadandykmaulana/IPnDNSChecker.git</code></li>
+                    <li style="margin-bottom: 12px;"><strong>Masuk Folder & Buat Virtual Environment:</strong> <br><code>cd IPnDNSChecker && python -m venv venv</code></li>
+                    <li style="margin-bottom: 12px;"><strong>Aktivasi Venv & Install Library:</strong> <br><code>source venv/bin/activate</code> (Linux/Mac) atau <code>venv\Scripts\activate</code> (Win) <br><code>pip install -r requirements.txt</code></li>
+                    <li style="margin-bottom: 12px;"><strong>Set API Key:</strong> Masukkan key AbuseIPDB & VirusTotal ke dalam file <code>.env</code>.</li>
+                    <li><strong>Jalankan:</strong> <br><code>python app.py</code> lalu buka <code>http://127.0.0.1:5000</code> di browser.</li>
+                </ol>
+            </section>
+
+            <!-- Slide 8: Arsitektur & Alur Kerja -->
             <section>
                 <h3>Alur Kerja Sistem</h3>
                 <ol style="font-size: 0.7em;">
@@ -140,7 +181,7 @@
                 </ol>
             </section>
 
-            <!-- Slide 7: Link Repo & Demo -->
+            <!-- Slide 9: Link Repo & Demo -->
             <section>
                 <h3>Akses Proyek</h3>
                 <div style="margin-top: 40px;">
@@ -153,13 +194,13 @@
                 </div>
             </section>
 
-            <!-- Slide 8: Kesimpulan -->
+            <!-- Slide 10: Kesimpulan -->
             <section>
                 <h3>Kesimpulan</h3>
                 <ul>
                     <li>Alur kerja full-stack (Back-end Python + Front-end HTML) berhasil diimplementasikan.</li>
                     <li>Flask terbukti ringan dan efisien sebagai jembatan antara UI dan API Pihak Ketiga.</li>
-                    <li>Struktur proyek (app.py & folder templates) telah memenuhi standar pengembangan web modern.</li>
+                    <li>Struktur proyek telah memenuhi standar pengembangan web modern.</li>
                     <li>Aplikasi memiliki fondasi kuat untuk penambahan fitur pemindaian keamanan lainnya.</li>
                 </ul>
                 <h4 style="margin-top: 30px;" class="highlight-blue">Terima Kasih</h4>
