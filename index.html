@@ -148,10 +148,10 @@
                 <h3>Struktur Direktori</h3>
                 <p>Mengadopsi standar pemisahan logika dan tampilan (MVC-style):</p>
                 <div class="code-block">
-<pre>Cyber-Threat-Analyzer/
+<pre>IPnDNSChecker/
 ├── app.py                 # File utama routing Flask & logika API
-├── requirements.txt       # Daftar library (dependencies)
-├── .env                   # File tersembunyi untuk API Key
+├── static/                # Folder aset statis
+│   └── style.css          # File CSS kustom antarmuka
 └── templates/             # Folder wajib untuk tampilan HTML
     ├── index.html         # Form input halaman utama
     └── result.html        # Halaman tabel hasil analisis</pre>
@@ -161,13 +161,25 @@
             <!-- Slide 7: Cara Install -->
             <section>
                 <h3>Panduan Instalasi Lokal</h3>
-                <ol style="font-size: 0.65em; text-align: left; margin-left: 20px;">
-                    <li style="margin-bottom: 12px;"><strong>Clone Repo:</strong> <br><code>git clone https://github.com/muhammadandykmaulana/IPnDNSChecker.git</code></li>
-                    <li style="margin-bottom: 12px;"><strong>Masuk Folder & Buat Virtual Environment:</strong> <br><code>cd IPnDNSChecker && python -m venv venv</code></li>
-                    <li style="margin-bottom: 12px;"><strong>Aktivasi Venv & Install Library:</strong> <br><code>source venv/bin/activate</code> (Linux/Mac) atau <code>venv\Scripts\activate</code> (Win) <br><code>pip install -r requirements.txt</code></li>
-                    <li style="margin-bottom: 12px;"><strong>Set API Key:</strong> Masukkan key AbuseIPDB & VirusTotal ke dalam file <code>.env</code>.</li>
-                    <li><strong>Jalankan:</strong> <br><code>python app.py</code> lalu buka <code>http://127.0.0.1:5000</code> di browser.</li>
-                </ol>
+                <div style="font-size: 0.55em; text-align: left; margin-top: 20px;">
+                    <p><strong>1. Clone Repositori & Instalasi Library</strong><br>Buka terminal dan jalankan perintah berikut:</p>
+                    <div class="code-block" style="margin-top: 5px; margin-bottom: 15px;">
+<pre># Clone repository proyek
+git clone https://github.com/muhammadandykmaulana/IPnDNSChecker.git
+# Masuk ke dalam direktori proyek
+cd IPnDNSChecker
+# Install library yang dibutuhkan
+pip install Flask requests</pre>
+                    </div>
+                    
+                    <p><strong>2. Konfigurasi API Key</strong><br>Buka file <code>app.py</code>, cari variabel di bawah ini, dan masukkan API Key Anda:</p>
+                    <div class="code-block" style="margin-top: 5px;">
+<pre>ABUSEIPDB_API_KEY = 'MASUKKAN_API_KEY_ABUSEIPDB_DISINI'
+VIRUSTOTAL_API_KEY = 'MASUKKAN_API_KEY_VIRUSTOTAL_DISINI'</pre>
+                    </div>
+                    
+                    <p style="margin-top: 15px;"><strong>3. Jalankan:</strong> Ketik <code>python app.py</code> lalu buka <code>http://127.0.0.1:5000</code></p>
+                </div>
             </section>
 
             <!-- Slide 8: Arsitektur & Alur Kerja -->
