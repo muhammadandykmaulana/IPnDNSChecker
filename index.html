@@ -1,421 +1,183 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentasi: Cyber Threat Analyzer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Presentasi Proyek Back-End: Cyber Threat Analyzer</title>
+
+    <!-- Reveal.js core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    
+    <!-- Theme (You can change 'night' to 'black', 'white', 'league', 'beige', etc.) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css" id="theme">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* Slate 900 */
-            color: #f8fafc;
-            overflow: hidden; /* Prevent scrolling, act like a PPT */
+        .reveal h1, .reveal h2, .reveal h3 {
+            text-transform: none; /* Keep original casing */
         }
-        
-        .code-font {
-            font-family: 'Fira Code', monospace;
+        .reveal p {
+            font-size: 0.8em;
+            line-height: 1.4;
         }
-
-        /* Slide Transition Animations */
-        .slide {
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease-in-out;
+        .reveal li {
+            font-size: 0.8em;
+            margin-bottom: 10px;
         }
-
-        .slide.active {
-            display: flex;
-            opacity: 1;
-            transform: translateY(0);
+        .small-text {
+            font-size: 0.6em !important;
+            color: #888;
         }
-
-        /* Custom Scrollbar for code blocks */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #1e293b; }
-        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        .table-custom {
+            font-size: 0.6em;
+            width: 100%;
+        }
+        .table-custom th {
+            background-color: #333;
+            color: white;
+        }
+        .highlight-blue {
+            color: #4da6ff;
+        }
+        .member-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 30px !important;
+            font-size: 0.9em !important;
+        }
+        .member-list li {
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
     </style>
 </head>
-<body class="h-screen w-screen flex flex-col selection:bg-cyan-500 selection:text-white">
+<body>
+    <div class="reveal">
+        <div class="slides">
 
-    <!-- Main Content Area -->
-    <main class="flex-1 relative w-full max-w-6xl mx-auto p-4 md:p-8 flex items-center justify-center">
-        
-        <!-- SLIDE 1: COVER -->
-        <div class="slide active flex-col items-center justify-center text-center w-full" id="slide-1">
-            <div class="mb-6 relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full blur opacity-75"></div>
-                <div class="relative bg-slate-900 rounded-full p-6">
-                    <i class="fa-solid fa-shield-halved text-6xl text-cyan-400"></i>
+            <!-- Slide 1: Title & Members -->
+            <section>
+                <h2>Cyber Threat Analyzer</h2>
+                <p>Tugas Proyek Mata Kuliah Pemrograman Back-End</p>
+                <hr>
+                <h4 class="highlight-blue">Kelompok 9</h4>
+                <ul class="member-list">
+                    <li>Muhammad Andyk Maulana (NIM: 1002240004)</li>
+                    <li>Afristian Ramadhan Firdaus (NIM: 1002240010)</li>
+                    <li>M. Syafiq Fawwaz Al Hanif (NIM: 1002240021)</li>
+                </ul>
+            </section>
+
+            <!-- Slide 2: Latar Belakang -->
+            <section>
+                <h3>Latar Belakang</h3>
+                <ul>
+                    <li>Ancaman kejahatan siber terus meningkat.</li>
+                    <li>IP dan Domain sering menjadi pintu masuk serangan (malware, phishing, spam).</li>
+                    <li>Kebutuhan akan alat verifikasi keamanan jaringan yang mudah diakses.</li>
+                    <li><span class="highlight-blue">Solusi:</span> Membangun aplikasi berbasis web "Cyber Threat Analyzer" menggunakan Flask Python untuk analisis reputasi IP/Domain secara real-time.</li>
+                </ul>
+            </section>
+
+            <!-- Slide 3: Tujuan Proyek -->
+            <section>
+                <h3>Tujuan Proyek</h3>
+                <ol>
+                    <li>Mengimplementasikan penggunaan framework <strong>Flask</strong> untuk layanan back-end dinamis.</li>
+                    <li>Mempraktikkan pengambilan dan pengolahan data JSON dari API publik menggunakan library <code>requests</code>.</li>
+                    <li>Menampilkan data respons API secara interaktif menggunakan metode <strong>looping</strong> (perulangan) pada template HTML Jinja2.</li>
+                </ol>
+            </section>
+
+            <!-- Slide 4: Tech Stack -->
+            <section>
+                <h3>Teknologi yang Digunakan</h3>
+                <ul>
+                    <li><strong>Back-End:</strong> Python 3 + Framework Flask</li>
+                    <li><strong>Front-End:</strong> HTML5, CSS3, Jinja2 Templating Engine</li>
+                    <li><strong>Integrasi Pihak Ketiga:</strong> Modul <code>requests</code> (HTTP GET)</li>
+                    <li><strong>Deployment & Infrastruktur:</strong> GitHub Codespaces</li>
+                </ul>
+            </section>
+
+            <!-- Slide 5: Integrasi API -->
+            <section>
+                <h3>Integrasi API Publik</h3>
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>Nama API</th>
+                            <th>Kegunaan</th>
+                            <th>Format</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong class="highlight-blue">AbuseIPDB API v2</strong></td>
+                            <td>Mengambil skor kepercayaan, detail ISP, dan riwayat laporan aktivitas mencurigakan dari sebuah alamat IP.</td>
+                            <td>JSON</td>
+                        </tr>
+                        <tr>
+                            <td><strong class="highlight-blue">VirusTotal API v3</strong></td>
+                            <td>Mengambil hasil pemindaian dari puluhan mesin antivirus global (Kaspersky, BitDefender, dll) terhadap sebuah URL/Domain.</td>
+                            <td>JSON</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Slide 6: Arsitektur & Alur Kerja -->
+            <section>
+                <h3>Alur Kerja Sistem</h3>
+                <ol style="font-size: 0.7em;">
+                    <li><strong>Input Pengguna:</strong> Memilih tipe (IP/Domain) dan memasukkan target di halaman utama.</li>
+                    <li><strong>Pemrosesan Back-End:</strong> Flask menerima POST request, menyusun Header (API Key), dan menembak endpoint API yang sesuai.</li>
+                    <li><strong>Pengolahan Data:</strong> Parsing data mentah JSON, menyaring array dan dictionary yang dibutuhkan.</li>
+                    <li><strong>Rendering:</strong> Data dikirim ke <code>result.html</code>. Looping Jinja2 menyusun laporan menjadi tabel data.</li>
+                </ol>
+            </section>
+
+            <!-- Slide 7: Link Repo & Demo -->
+            <section>
+                <h3>Akses Proyek</h3>
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 1.2em;"><strong>GitHub Repository:</strong></p>
+                    <p><a href="https://github.com/muhammadandykmaulana/IPnDNSChecker" target="_blank" class="highlight-blue">github.com/muhammadandykmaulana/IPnDNSChecker</a></p>
                 </div>
-            </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-                Cyber Threat Analyzer
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-300 font-light mb-2">(IP / DNS Checker)</p>
-            <p class="text-md text-slate-400 mb-6">Proyek UTS Pemrograman Back-End</p>
-            
-            <div class="mb-8 p-4 bg-slate-800/50 rounded-xl border border-slate-700 inline-block text-left">
-                <p class="text-slate-300 text-sm mb-1"><i class="fa-solid fa-user-graduate text-cyan-400 mr-2"></i><strong>Oleh:</strong></p>
-                <p class="text-white font-bold text-lg">Muhammad Andyk Maulana</p>
-                <p class="text-cyan-400 font-mono text-sm">NIM: TI - 1002240004</p>
-            </div>
-            
-            <div class="flex flex-wrap gap-4 justify-center mt-4">
-                <a href="https://ipndns.servant.biz.id" target="_blank" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-semibold flex items-center gap-2 transition-colors border border-blue-400 shadow-[0_0_15px_rgba(37,99,235,0.5)]">
-                    <i class="fa-solid fa-globe"></i> Live Demo
-                </a>
-                <a href="https://github.com/muhammadandykmaulana/IPnDNSChecker" target="_blank" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-semibold flex items-center gap-2 transition-colors border border-slate-600">
-                    <i class="fa-brands fa-github"></i> GitHub Repo
-                </a>
-            </div>
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 1.2em;"><strong>Live Demo (GitHub Pages):</strong></p>
+                    <p><a href="https://ipndnsshow.servant.biz.id/" target="_blank" class="highlight-blue">ipndnsshow.servant.biz.id</a></p>
+                </div>
+            </section>
+
+            <!-- Slide 8: Kesimpulan -->
+            <section>
+                <h3>Kesimpulan</h3>
+                <ul>
+                    <li>Alur kerja full-stack (Back-end Python + Front-end HTML) berhasil diimplementasikan.</li>
+                    <li>Flask terbukti ringan dan efisien sebagai jembatan antara UI dan API Pihak Ketiga.</li>
+                    <li>Struktur proyek (app.py & folder templates) telah memenuhi standar pengembangan web modern.</li>
+                    <li>Aplikasi memiliki fondasi kuat untuk penambahan fitur pemindaian keamanan lainnya.</li>
+                </ul>
+                <h4 style="margin-top: 30px;" class="highlight-blue">Terima Kasih</h4>
+            </section>
+
         </div>
+    </div>
 
-        <!-- SLIDE 2: LATAR BELAKANG & TUJUAN -->
-        <div class="slide flex-col items-start justify-center w-full max-w-4xl" id="slide-2">
-            <h2 class="text-3xl font-bold border-b-2 border-cyan-500 pb-2 mb-8 w-full flex items-center gap-3">
-                <i class="fa-solid fa-bullseye text-cyan-400"></i> Latar Belakang & Tujuan
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-8 w-full">
-                <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-blue-300"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Latar Belakang</h3>
-                    <p class="text-slate-300 leading-relaxed text-sm md:text-base">
-                        Meningkatnya ancaman kejahatan siber (malware, phishing, spam) menuntut adanya <strong>alat peringatan dini yang sederhana</strong> untuk memvalidasi keamanan suatu IP atau Domain secara real-time.
-                    </p>
-                </div>
-                
-                <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-green-300"><i class="fa-solid fa-flag-checkered mr-2"></i> Tujuan Proyek</h3>
-                    <ul class="list-disc list-inside text-slate-300 space-y-2 text-sm md:text-base">
-                        <li><strong>Tugas UTS:</strong> Integrasi API publik menggunakan <span class="text-cyan-400">Flask</span>.</li>
-                        <li><strong>HTTP Request:</strong> Pengambilan data dinamis via library <span class="text-cyan-400">requests</span>.</li>
-                        <li><strong>Data Rendering:</strong> Parsing JSON kompleks ke HTML via <span class="text-cyan-400">Jinja2</span>.</li>
-                        <li><strong>Deployment:</strong> Implementasi Reverse Proxy via <span class="text-cyan-400">Cloudflare Tunnel</span>.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 3: FITUR UTAMA -->
-        <div class="slide flex-col items-start justify-center w-full max-w-4xl" id="slide-3">
-            <h2 class="text-3xl font-bold border-b-2 border-cyan-500 pb-2 mb-8 w-full flex items-center gap-3">
-                <i class="fa-solid fa-microchip text-cyan-400"></i> Fitur Utama Aplikasi
-            </h2>
-            
-            <p class="text-slate-300 mb-8 text-lg">Mengecek apakah sebuah target aman diakses berdasarkan data dari sumber global.</p>
-
-            <div class="flex flex-col gap-6 w-full">
-                <!-- Feature 1 -->
-                <div class="flex items-start gap-4 bg-slate-800/50 p-5 rounded-xl border border-slate-700 border-l-4 border-l-red-500">
-                    <div class="bg-red-500/20 p-3 rounded-lg text-red-400 text-2xl">
-                        <i class="fa-solid fa-network-wired"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-2">Pencarian IP Address</h3>
-                        <p class="text-slate-400 text-sm">Terintegrasi dengan <strong>AbuseIPDB API</strong>.</p>
-                        <p class="text-slate-300 mt-1">Mendeteksi aktivitas berbahaya (DDoS, spam, malware). Menampilkan <strong>Skor Risiko</strong> dan tabel riwayat laporan detail.</p>
-                    </div>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="flex items-start gap-4 bg-slate-800/50 p-5 rounded-xl border border-slate-700 border-l-4 border-l-blue-500">
-                    <div class="bg-blue-500/20 p-3 rounded-lg text-blue-400 text-2xl">
-                        <i class="fa-solid fa-globe"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-2">Pencarian Nama Domain</h3>
-                        <p class="text-slate-400 text-sm">Terintegrasi dengan <strong>VirusTotal API v3</strong>.</p>
-                        <p class="text-slate-300 mt-1">Mengecek status website dari puluhan vendor antivirus global. Mencegah akses ke web phishing atau distribusi malware.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 4: TECH STACK & ARSITEKTUR -->
-        <div class="slide flex-col items-start justify-center w-full max-w-4xl" id="slide-4">
-            <h2 class="text-3xl font-bold border-b-2 border-cyan-500 pb-2 mb-8 w-full flex items-center gap-3">
-                <i class="fa-solid fa-layer-group text-cyan-400"></i> Tech Stack & Infrastruktur
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-6 w-full">
-                <!-- Stack List -->
-                <div class="space-y-4">
-                    <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3">
-                        <i class="fa-brands fa-python text-2xl text-yellow-400"></i>
-                        <div><strong class="block">Back-End</strong> <span class="text-sm text-slate-400">Python 3, Flask, Requests</span></div>
-                    </div>
-                    <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3">
-                        <i class="fa-brands fa-html5 text-2xl text-orange-500"></i>
-                        <div><strong class="block">Front-End</strong> <span class="text-sm text-slate-400">HTML5, CSS3, JS (Vanilla)</span></div>
-                    </div>
-                    <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3">
-                        <i class="fa-solid fa-database text-2xl text-blue-400"></i>
-                        <div><strong class="block">Data Sources</strong> <span class="text-sm text-slate-400">AbuseIPDB & VirusTotal API</span></div>
-                    </div>
-                </div>
-
-                <!-- Arsitektur Flow -->
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-600 flex flex-col justify-center">
-                    <h3 class="font-bold text-cyan-300 mb-4"><i class="fa-solid fa-server mr-2"></i> Arsitektur Deployment</h3>
-                    <p class="text-sm text-slate-300 mb-4">Dikembangkan di <strong>GitHub Codespaces</strong> (tertutup). Menggunakan <strong>Cloudflare Tunnel</strong> untuk expose port 5000 ke internet publik.</p>
-                    
-                    <div class="flex flex-col items-center text-sm font-mono text-center gap-2">
-                        <div class="bg-slate-700 py-1 px-3 rounded w-full">Internet Publik (Client)</div>
-                        <i class="fa-solid fa-arrow-down text-cyan-500"></i>
-                        <div class="bg-blue-900 py-1 px-3 rounded w-full border border-blue-500">ipndns.servant.biz.id (Cloudflare)</div>
-                        <i class="fa-solid fa-arrow-down text-cyan-500"></i>
-                        <div class="bg-slate-700 py-1 px-3 rounded w-full">Codespace (Port 5000 / Flask)</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 5: STRUKTUR PROYEK -->
-        <div class="slide flex-col items-start justify-center w-full max-w-4xl" id="slide-5">
-            <h2 class="text-3xl font-bold border-b-2 border-cyan-500 pb-2 mb-6 w-full flex items-center gap-3">
-                <i class="fa-solid fa-folder-tree text-cyan-400"></i> Struktur Proyek
-            </h2>
-            
-            <p class="text-slate-300 mb-6">Proyek ini diatur menggunakan standar direktori Flask untuk memisahkan logika back-end, tampilan, dan aset statis.</p>
-
-            <div class="w-full bg-slate-900 rounded-xl border border-slate-700 overflow-hidden shadow-lg p-6">
-                <pre class="code-font text-sm text-slate-300 overflow-x-auto">
-<span class="text-cyan-400 font-bold">IPnDNSChecker/</span>
-├── <span class="text-yellow-300">app.py</span>             <span class="text-slate-500"># File utama: rute Flask & pemanggilan API Publik</span>
-├── <span class="text-green-300">requirements.txt</span>   <span class="text-slate-500"># Daftar library Python (Flask, requests)</span>
-├── <span class="text-blue-300">static/</span>
-│   └── <span class="text-yellow-300">style.css</span>      <span class="text-slate-500"># CSS kustom (opsional jika pakai Tailwind)</span>
-└── <span class="text-blue-300">templates/</span>
-    ├── <span class="text-orange-300">index.html</span>     <span class="text-slate-500"># Halaman utama (Form input pencarian)</span>
-    └── <span class="text-orange-300">results.html</span>   <span class="text-slate-500"># Halaman dinamis menampilkan data API</span>
-                </pre>
-            </div>
-        </div>
-
-        <!-- SLIDE 6: UI/UX -->
-        <div class="slide flex-col items-start justify-center w-full max-w-4xl" id="slide-6">
-            <h2 class="text-3xl font-bold border-b-2 border-cyan-500 pb-2 mb-8 w-full flex items-center gap-3">
-                <i class="fa-solid fa-wand-magic-sparkles text-cyan-400"></i> Peningkatan UI / UX
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-8 w-full">
-                <div class="bg-slate-800/80 p-6 rounded-xl">
-                    <h3 class="text-lg font-bold text-yellow-300 mb-3"><i class="fa-brands fa-js"></i> Dynamic Placeholder (JS)</h3>
-                    <p class="text-sm text-slate-300 mb-4">Teks input berubah otomatis berdasarkan pilihan radio button untuk memandu user.</p>
-                    <div class="bg-slate-900 p-3 rounded border border-slate-700 code-font text-xs text-slate-400 space-y-2">
-                        <div><span class="text-cyan-400">IP:</span> "Masukkan Alamat IP (misal: 8.8.8.8)"</div>
-                        <div><span class="text-cyan-400">URL:</span> "Masukkan Domain (misal: google.com)"</div>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/80 p-6 rounded-xl">
-                    <h3 class="text-lg font-bold text-orange-300 mb-3"><i class="fa-solid fa-code"></i> Conditional Rendering (Jinja2)</h3>
-                    <p class="text-sm text-slate-300 mb-4">Mewarnai badge status ancaman secara dinamis di <code class="text-cyan-300">results.html</code> berdasarkan data API.</p>
-                    <div class="flex gap-3">
-                        <span class="px-3 py-1 bg-red-500/20 text-red-400 border border-red-500 rounded text-xs font-bold">Malicious</span>
-                        <span class="px-3 py-1 bg-green-500/20 text-green-400 border border-green-500 rounded text-xs font-bold">Harmless</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 7: INSTALASI & PENGGUNAAN -->
-        <div class="slide flex-col items-start justify-center w-full max-w-4xl" id="slide-7">
-            <h2 class="text-3xl font-bold border-b-2 border-cyan-500 pb-2 mb-6 w-full flex items-center gap-3">
-                <i class="fa-solid fa-terminal text-cyan-400"></i> Instalasi & Penggunaan Lokal
-            </h2>
-            
-            <div class="w-full bg-black/60 rounded-xl border border-slate-700 overflow-hidden shadow-lg">
-                <div class="bg-slate-800 px-4 py-2 border-b border-slate-700 flex gap-2">
-                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                </div>
-                <div class="p-5 code-font text-sm text-slate-300 overflow-x-auto space-y-3">
-                    <div>
-                        <span class="text-slate-500"># 1. Clone & Masuk direktori</span><br>
-                        <span class="text-green-400">git clone</span> https://github.com/muhammadandykmaulana/IPnDNSChecker.git<br>
-                        <span class="text-green-400">cd</span> IPnDNSChecker
-                    </div>
-                    <div>
-                        <span class="text-slate-500"># 2. Install dependensi</span><br>
-                        <span class="text-green-400">pip install</span> Flask requests
-                    </div>
-                    <div>
-                        <span class="text-slate-500"># 3. Konfigurasi (app.py)</span><br>
-                        <span class="text-purple-400">ABUSEIPDB_API_KEY</span> = <span class="text-yellow-300">'API_KEY_ANDA'</span><br>
-                        <span class="text-purple-400">VIRUSTOTAL_API_KEY</span> = <span class="text-yellow-300">'API_KEY_ANDA'</span>
-                    </div>
-                    <div>
-                        <span class="text-slate-500"># 4. Jalankan aplikasi lokal (Akses localhost:5000)</span><br>
-                        <span class="text-green-400">python</span> app.py
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 8: DEPLOYMENT CLOUDFLARE (PART 1) -->
-        <div class="slide flex-col items-start justify-center w-full max-w-4xl" id="slide-8">
-            <h2 class="text-3xl font-bold border-b-2 border-cyan-500 pb-2 mb-6 w-full flex items-center gap-3">
-                <i class="fa-solid fa-cloud text-cyan-400"></i> Deployment via Cloudflare Tunnel (1/2)
-            </h2>
-            
-            <p class="text-slate-300 mb-6 text-lg">Mengekspos local server (Codespace) ke internet publik dengan aman.</p>
-
-            <div class="grid gap-6 w-full">
-                <!-- Step 1 -->
-                <div class="bg-slate-800/80 p-6 rounded-xl border border-slate-700">
-                    <h3 class="text-xl font-bold text-white mb-3">1. Install Cloudflared</h3>
-                    <div class="bg-black/50 p-4 rounded code-font text-sm text-slate-300 overflow-x-auto whitespace-pre-wrap">
-<span class="text-slate-500"># Contoh untuk OS Debian/Ubuntu</span>
-curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
-sudo dpkg -i cloudflared.deb</div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="bg-slate-800/80 p-6 rounded-xl border border-slate-700">
-                    <h3 class="text-xl font-bold text-white mb-3">2. Login & Otentikasi</h3>
-                    <div class="bg-black/50 p-4 rounded code-font text-sm text-slate-300 overflow-x-auto">
-<span class="text-slate-500"># Buka tautan di browser untuk otentikasi akun Cloudflare Anda</span>
-cloudflared tunnel login</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 9: DEPLOYMENT CLOUDFLARE (PART 2) -->
-        <div class="slide flex-col items-start justify-center w-full max-w-4xl" id="slide-9">
-            <h2 class="text-3xl font-bold border-b-2 border-cyan-500 pb-2 mb-6 w-full flex items-center gap-3">
-                <i class="fa-solid fa-cloud text-cyan-400"></i> Deployment via Cloudflare Tunnel (2/2)
-            </h2>
-            
-            <div class="grid gap-6 w-full">
-                <!-- Step 3 -->
-                <div class="bg-slate-800/80 p-6 rounded-xl border border-slate-700">
-                    <h3 class="text-xl font-bold text-white mb-3">3. Setup Custom Domain (Permanen)</h3>
-                    <div class="bg-black/50 p-4 rounded code-font text-sm text-slate-300 overflow-x-auto space-y-2 whitespace-pre-wrap">
-<div><span class="text-slate-500"># Buat tunnel baru</span>
-cloudflared tunnel create <span class="text-cyan-300">namatunnel</span></div>
-<div><span class="text-slate-500"># Hubungkan tunnel ke domain/subdomain</span>
-cloudflared tunnel route dns <span class="text-cyan-300">namatunnel</span> ipndns.domain.com</div>
-                    </div>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="bg-slate-800/80 p-6 rounded-xl border border-slate-700 border-l-4 border-l-green-400">
-                    <h3 class="text-xl font-bold text-white mb-2">4. Cara Instan (Quick Way)</h3>
-                    <p class="text-sm text-slate-300 mb-3">Jika hanya ingin mengekspos port sementara tanpa setup domain di dashboard, gunakan perintah ini saat Flask berjalan:</p>
-                    <div class="bg-black/50 p-4 rounded code-font text-sm md:text-base text-green-400 overflow-x-auto whitespace-pre-wrap">cloudflared tunnel --url http://localhost:5000</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 10: KESIMPULAN -->
-        <div class="slide flex-col items-center justify-center text-center w-full max-w-4xl" id="slide-10">
-            <i class="fa-solid fa-check-circle text-6xl text-green-400 mb-6"></i>
-            <h2 class="text-4xl font-bold mb-8 text-white">Kesimpulan</h2>
-            
-            <div class="bg-slate-800/60 p-8 rounded-2xl border border-slate-600 text-left w-full space-y-4 shadow-xl">
-                <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-check text-green-400 mt-1"></i>
-                    <p class="text-slate-300"><strong>Flask efisien:</strong> Terbukti sangat handal untuk merutekan permintaan pengguna dan menjembataninya dengan API eksternal.</p>
-                </div>
-                <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-check text-green-400 mt-1"></i>
-                    <p class="text-slate-300"><strong>Integrasi Berhasil:</strong> Mampu menarik data real-time dari sumber terpercaya (AbuseIPDB & VirusTotal).</p>
-                </div>
-                <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-check text-green-400 mt-1"></i>
-                    <p class="text-slate-300"><strong>Rendering Data Kompleks:</strong> Pemisahan antarmuka (HTML/CSS/JS) dengan <strong>Jinja2</strong> mempermudah iterasi (looping) JSON kompleks menjadi tabel yang ramah bagi pengguna awam.</p>
-                </div>
-            </div>
-
-            <div class="mt-10">
-                <p class="text-slate-400 text-sm">Terima Kasih</p>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- Navigation Footer -->
-    <footer class="bg-slate-900 border-t border-slate-800 py-4 px-6 flex justify-between items-center z-10 shadow-[0_-10px_20px_rgba(0,0,0,0.3)]">
-        <button id="btnPrev" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded transition disabled:opacity-50 disabled:cursor-not-allowed border border-slate-600 flex items-center gap-2">
-            <i class="fa-solid fa-chevron-left"></i> Prev
-        </button>
-        
-        <div class="text-slate-400 font-mono text-sm font-semibold tracking-widest">
-            <span id="slideCounter" class="text-cyan-400">1</span> / <span id="totalSlides">10</span>
-        </div>
-        
-        <button id="btnNext" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded transition disabled:opacity-50 disabled:cursor-not-allowed border border-slate-600 flex items-center gap-2">
-            Next <i class="fa-solid fa-chevron-right"></i>
-        </button>
-    </footer>
-
-    <!-- JavaScript for Presentation Logic -->
+    <!-- Reveal.js core script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const slides = document.querySelectorAll('.slide');
-            const btnPrev = document.getElementById('btnPrev');
-            const btnNext = document.getElementById('btnNext');
-            const slideCounter = document.getElementById('slideCounter');
-            const totalSlidesSpan = document.getElementById('totalSlides');
-            
-            let currentSlide = 0;
-            const totalSlides = slides.length;
-            totalSlidesSpan.textContent = totalSlides;
-
-            function updateUI() {
-                // Hide all slides
-                slides.forEach(slide => {
-                    slide.classList.remove('active');
-                });
-                
-                // Show current slide
-                slides[currentSlide].classList.add('active');
-                
-                // Update counter
-                slideCounter.textContent = currentSlide + 1;
-                
-                // Update button states
-                btnPrev.disabled = currentSlide === 0;
-                btnNext.disabled = currentSlide === totalSlides - 1;
-            }
-
-            function nextSlide() {
-                if (currentSlide < totalSlides - 1) {
-                    currentSlide++;
-                    updateUI();
-                }
-            }
-
-            function prevSlide() {
-                if (currentSlide > 0) {
-                    currentSlide--;
-                    updateUI();
-                }
-            }
-
-            // Event Listeners for Buttons
-            btnNext.addEventListener('click', nextSlide);
-            btnPrev.addEventListener('click', prevSlide);
-
-            // Event Listener for Keyboard Arrows
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight' || e.key === 'Space') {
-                    nextSlide();
-                } else if (e.key === 'ArrowLeft') {
-                    prevSlide();
-                }
-            });
-
-            // Initialize
-            updateUI();
+        // Initialize Reveal.js
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide' // none/fade/slide/convex/concave/zoom
         });
     </script>
 </body>
