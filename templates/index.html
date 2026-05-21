@@ -1,67 +1,68 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <!-- [SOAL 2c] Tampilan tersusun rapi menggunakan framework CSS (Tailwind) -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🛡️ IP / DNS Checker</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Cyber Threat Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-brand">Tugas Backend Kel/UTS</div>
-        <ul class="nav-links">
-            <li><a href="/">Beranda Utama</a></li>
-        </ul>
-    </nav>
+<body class="bg-slate-900 text-white min-h-screen flex items-center justify-center p-4">
 
-    <div class="container">
-        <h1 class="page-title">🛡️ IP / DNS Checker</h1>
-        <p class="description">
-            Periksa reputasi Alamat IP atau Domain untuk mendeteksi ancaman seperti Malware, Phishing, dan Spam.
-        </p>
+    <!-- [SOAL 2b] Menampilkan Judul/Nama Data -->
+    <div class="bg-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-slate-700">
+        <div class="text-center mb-8">
+            <i class="fa-solid fa-shield-halved text-5xl text-cyan-500 mb-4"></i>
+            <h1 class="text-2xl font-bold">Cyber Threat Analyzer</h1>
+            <p class="text-slate-400 text-sm mt-2">Cek Reputasi Keamanan IP atau Domain</p>
+        </div>
 
+        <!-- Menampilkan pesan error dari backend jika ada masalah (IP salah format, dsb) -->
         {% if error %}
-            <div class="alert error">{{ error }}</div>
+            <div class="bg-red-500/20 border border-red-500 text-red-400 p-3 rounded-lg mb-6 text-sm text-center">
+                {{ error }}
+            </div>
         {% endif %}
 
-        <div class="card form-card">
-            <form method="POST">
-                <div class="radio-group">
-                    <label class="radio-label">
-                        <input type="radio" name="search_type" value="ip" checked>
-                        <span class="radio-text">IP Address (AbuseIPDB)</span>
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="search_type" value="domain">
-                        <span class="radio-text">Domain URL (VirusTotal)</span>
-                    </label>
-                </div>
+        <form action="/" method="POST" class="space-y-6">
+            <!-- [SOAL 3b] Pencarian Sederhana berdasarkan kategori API -->
+            <div class="flex gap-4 p-1 bg-slate-900 rounded-lg">
+                <label class="flex-1 cursor-pointer">
+                    <input type="radio" name="target_type" value="ip" checked class="peer sr-only" onchange="updatePlaceholder('ip')">
+                    <div class="text-center py-2 rounded-md peer-checked:bg-cyan-600 transition font-semibold text-sm text-slate-400 peer-checked:text-white">
+                        <i class="fa-solid fa-network-wired mr-2"></i>IP Address
+                    </div>
+                </label>
+                <label class="flex-1 cursor-pointer">
+                    <input type="radio" name="target_type" value="domain" class="peer sr-only" onchange="updatePlaceholder('domain')">
+                    <div class="text-center py-2 rounded-md peer-checked:bg-cyan-600 transition font-semibold text-sm text-slate-400 peer-checked:text-white">
+                        <i class="fa-solid fa-globe mr-2"></i>Domain URL
+                    </div>
+                </label>
+            </div>
 
-                <input type="text" name="target_input" placeholder="Masukkan Alamat IP (misal: 8.8.8.8)" required>
-                <button type="submit" class="btn">Mulai Cek Sekarang!</button>
-            </form>
-        </div>
+            <div>
+                <input type="text" name="target" id="targetInput" required 
+                       class="w-full bg-slate-900 border border-slate-600 p-4 rounded-lg focus:outline-none focus:border-cyan-500 transition"
+                       placeholder="Masukkan Alamat IP (misal: 8.8.8.8)">
+            </div>
+
+            <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-500 py-3 rounded-lg font-bold transition shadow-[0_0_15px_rgba(8,145,178,0.5)]">
+                <i class="fa-solid fa-magnifying-glass mr-2"></i> Analisis Target
+            </button>
+        </form>
     </div>
 
-    <!-- Script untuk placeholder dinamis -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const ipRadio = document.querySelector('input[value="ip"]');
-            const domainRadio = document.querySelector('input[value="domain"]');
-            const targetInput = document.querySelector('input[name="target_input"]');
-
-            function updatePlaceholder() {
-                if (ipRadio.checked) {
-                    targetInput.placeholder = "Masukkan Alamat IP (misal: 8.8.8.8)";
-                } else {
-                    targetInput.placeholder = "Masukkan Nama Domain (misal: google.com)";
-                }
+        function updatePlaceholder(type) {
+            const input = document.getElementById('targetInput');
+            if (type === 'ip') {
+                input.placeholder = "Masukkan Alamat IP (misal: 8.8.8.8)";
+            } else {
+                input.placeholder = "Masukkan Nama Domain (misal: google.com)";
             }
-
-            ipRadio.addEventListener('change', updatePlaceholder);
-            domainRadio.addEventListener('change', updatePlaceholder);
-            updatePlaceholder(); // atur saat halaman dimuat
-        });
+        }
     </script>
 </body>
 </html>
